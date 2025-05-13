@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import mongoose from 'mongoose';
 import Image from 'next/image';
 import connectMongo from '@/utils/connectMongo';
@@ -47,9 +48,11 @@ export default async function ProductDetailPage({ params }) {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <span className="text-3xl font-semibold text-gray-800">₹{product.price}</span>
 
-              <button className="bg-green-500 text-white px-4 py-2 ml-[20%] sm:px-6 sm:py-2 text-sm sm:text-base rounded-md hover:bg-green-600 transition">
-                BUY NOW
-              </button>
+                <Link href={`/buynow/${product._id}`}>
+                  <button className="bg-green-500 text-white px-4 py-2  sm:px-6 sm:py-2 text-sm sm:text-base rounded-md hover:bg-green-600 transition">
+                    BUY NOW
+                  </button>
+                </Link>
               <button className="bg-green-500 text-white px-4 py-2 sm:px-6 sm:py-2 text-sm sm:text-base rounded-md hover:bg-green-600 transition">
                 ADD TO CART
               </button>

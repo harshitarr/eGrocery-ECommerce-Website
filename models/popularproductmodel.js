@@ -4,11 +4,10 @@ const popularproductSchema = new Schema({
   name: String,
   weight: String,
   description: String,
-  qantity:Number,
+  quantity: Number,  
   price: Number,
   image: String,
 });
-
 
 const PopularModel = models.PopularProduct || model('PopularProduct', popularproductSchema);
 
