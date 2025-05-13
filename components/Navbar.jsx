@@ -1,10 +1,11 @@
 import { ShoppingCart, User, Menu } from "lucide-react";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        <div className="text-2xl font-bold text-green-600">eGrocery</div>
+        <Link href='/'><div className="text-2xl font-bold text-green-600">eGrocery</div></Link>
 
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <div className="flex items-center w-full sm:w-[350px] border border-gray-300 rounded-md">
@@ -20,12 +21,12 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-6">
-          <button className="text-gray-700 hover:text-green-600">Home</button>
+          <Link href='/'><button className="text-gray-700 hover:text-green-600">Home</button></Link>
           <button className="text-gray-700 hover:text-green-600">Fruits & Vegetables</button>
           <button className="text-gray-700 hover:text-green-600">Snacks & Sweets</button>
           <button className="text-gray-700 hover:text-green-600">Contact Us</button>
           <User className="cursor-pointer text-gray-700 hover:text-green-600" />
-          <ShoppingCart className="cursor-pointer text-gray-700 hover:text-green-600" />
+          <Link href='/mycart'><ShoppingCart className="cursor-pointer text-gray-700 hover:text-green-600" /></Link>
         </div>
 
         <div className="md:hidden">
