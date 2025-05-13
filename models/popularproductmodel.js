@@ -4,7 +4,7 @@ const popularproductSchema = new Schema({
   name: String,
   weight: String,
   description: String,
-  qantity: Number,
+  qantity:Number,
   price: Number,
   image: String,
 });
