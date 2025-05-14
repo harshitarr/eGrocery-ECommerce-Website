@@ -1,10 +1,12 @@
 'use client';
 
 import { use, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import mongoose from 'mongoose';
 
 export default function ProductDetailPage(paramPromise) {
-  const { id } = use(paramPromise.params); // ✅ unwrap params with `use()`
+  const { id } = use(paramPromise.params);
+  const router = useRouter();
 
   const [product, setProduct] = useState(null);
   const [added, setAdded] = useState(false);
@@ -22,6 +24,7 @@ export default function ProductDetailPage(paramPromise) {
       try {
         const res = await fetch(`/api/product/${id}`);
         const data = await res.json();
+
         if (res.ok) {
           setProduct(data.product);
         } else {
@@ -47,8 +50,8 @@ export default function ProductDetailPage(paramPromise) {
           productId: product._id,
           name: product.name,
           price: product.price,
-          image: product.image
-        })
+          image: product.image,
+        }),
       });
 
       const data = await res.json();
@@ -90,13 +93,20 @@ export default function ProductDetailPage(paramPromise) {
           <div className="mt-6">
             <h4 className="text-sm font-medium text-gray-600 mb-2">Description</h4>
             <pre className="text-sm text-gray-600 whitespace-pre-wrap">{product.description}</pre>
-            <p className="text-sm text-gray-600 mt-4">Items in Pack: <strong>{product.items}</strong></p>
+            <p className="text-sm text-gray-600 mt-4">
+              Items in Pack: <strong>{product.items}</strong>
+            </p>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <span className="text-3xl font-semibold text-gray-800">₹{product.price}</span>
 
-            <button className="bg-green-500 text-white px-4 py-2 ml-[20%] sm:px-6 sm:py-2 text-sm sm:text-base rounded-md hover:bg-green-600 transition">
+            <button
+              className="bg-green-500 text-white px-4 py-2 sm:px-6 sm:py-2 text-sm sm:text-base rounded-md hover:bg-green-600 transition"
+              onClick={() => {
+                router.push(`/pay-now?productId=${product._id}&productName=${product.name}&productPrice=${product.price}`);
+              }}
+            >
               Buy Now
             </button>
 

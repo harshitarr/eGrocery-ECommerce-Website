@@ -47,7 +47,7 @@ export default async function ProductDetailPage({ params }) {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <span className="text-3xl font-semibold text-gray-800">₹{product.price}</span>
 
-            <Link href={`/buynow/${product._id}`}>
+            <Link href={`/paynow/${product._id}?type=popular`}>
               <button className="bg-green-500 text-white px-4 py-2 sm:px-6 sm:py-2 text-sm sm:text-base rounded-md hover:bg-green-600 transition">
                 BUY NOW
               </button>
