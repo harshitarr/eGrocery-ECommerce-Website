@@ -7,7 +7,12 @@ const ProductSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   category: { type: String, required: true },
   description: { type: String },
-  quantity: { type: Number, default: 0 } 
+  quantity: { type: Number, default: 0 },
+  type: {
+    type: String,
+    enum: ['normal', 'popular', 'bundle'],
+    default: 'normal',
+  },
 });
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
