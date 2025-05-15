@@ -10,18 +10,24 @@ export default async function SearchPage({ searchParams }) {
 
   await connectMongo();
 
-  // Fetch data from all 3 models
   const [products, populars, bundles] = await Promise.all([
     ProductModel.find({}).lean(),
     PopularModel.find({}).lean(),
     BundleModel.find({}).lean(),
   ]);
 
-  // Add a source field to each item (optional, useful if you want to identify the model later)
+  // Convert _id to string and mark source
+  const safeMap = (items, source) =>
+    items.map((item) => ({
+      ...item,
+      _id: item._id.toString(),
+      source,
+    }));
+
   const allItems = [
-    ...products.map((item) => ({ ...item, source: 'product' })),
-    ...populars.map((item) => ({ ...item, source: 'popular' })),
-    ...bundles.map((item) => ({ ...item, source: 'bundle' })),
+    ...safeMap(products, 'product'),
+    ...safeMap(populars, 'popular'),
+    ...safeMap(bundles, 'bundle'),
   ];
 
   // Fuse.js config
@@ -30,15 +36,7 @@ export default async function SearchPage({ searchParams }) {
     threshold: 0.4,
   });
 
-  const fuzzyResults = query
-    ? fuse.search(query).map((res) => ({
-        ...res.item,
-        _id: res.item._id.toString(),
-      }))
-    : allItems.map((item) => ({
-        ...item,
-        _id: item._id.toString(),
-      }));
+  const fuzzyResults = query ? fuse.search(query).map((res) => res.item) : allItems;
 
   return (
     <section className="px-6 py-10 mt-20 min-h-screen">

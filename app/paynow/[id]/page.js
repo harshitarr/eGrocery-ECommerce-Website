@@ -249,7 +249,7 @@ export default function PayNowPage() {
       {selectedMethod && (
         <button
           onClick={handlePayNow}
-          className="w-full py-3 text-white font-semibold bg-gradient-to-r from-purple-500 to-blue-500 rounded-md hover:opacity-90 transition"
+          className="w-full py-3 text-white font-semibold cursor-pointer bg-green-600 rounded-md hover:opacity-90 transition"
         >
           Pay now
         </button>

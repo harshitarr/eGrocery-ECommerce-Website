@@ -41,7 +41,7 @@ export default function ProductCard({ product }) {
         <p className="text-md text-green-600 font-bold">₹{product.price}</p>
         <button
           onClick={(e) => {
-            e.preventDefault(); // prevent link navigation
+            e.preventDefault(); 
             handleAddToCart();
           }}
           className="absolute bottom-4 right-4 bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition"

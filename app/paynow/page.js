@@ -130,7 +130,7 @@ export default function PayNowPage() {
     <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-xl shadow-md space-y-6">
       <h2 className="text-xl font-semibold text-gray-800">Checkout</h2>
 
-      {/* Payment method selection */}
+     
       <div className="flex justify-between gap-4">
         {paymentMethods.map((method) => (
           <div
@@ -147,7 +147,7 @@ export default function PayNowPage() {
         ))}
       </div>
 
-      {/* Cart summary */}
+      
       <div className="text-sm text-gray-700 space-y-2">
         <h3 className="font-semibold text-gray-800 mb-2">Order Summary:</h3>
         {cartItems.map((item) => (
@@ -162,7 +162,7 @@ export default function PayNowPage() {
         </div>
       </div>
 
-      {/* Conditional form section */}
+     
       {selectedMethod === "mastercard" && (
         <div className="space-y-3">
           <input
@@ -249,15 +249,15 @@ export default function PayNowPage() {
         </div>
       )}
 
-      {/* Error message */}
+      
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
-      {/* Pay Now button */}
+      
       {selectedMethod && (
         <button
           onClick={handleSubmitPayment}
           disabled={loading}
-          className="w-full py-3 text-white font-semibold bg-gradient-to-r from-purple-500 to-blue-500 rounded-md hover:opacity-90 transition"
+          className="w-full py-3 text-white font-semibold cursor-pointer bg-green-600 rounded-md hover:opacity-90 transition"
         >
           {loading ? "Processing..." : "Pay now"}
         </button>

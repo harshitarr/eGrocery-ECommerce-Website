@@ -57,10 +57,8 @@ export default function ShoppingCartPage() {
   );
 
   const handleBuyNow = () => {
-    // Persist to localStorage for the checkout page
     localStorage.setItem('cartItems', JSON.stringify(items));
     localStorage.setItem('cartTotal', total.toString());
-    // Navigate to Pay Now page
     router.push('/paynow');
   };
 
@@ -109,7 +107,7 @@ export default function ShoppingCartPage() {
 
         <button
           onClick={handleBuyNow}
-          className="w-full text-white bg-black py-2 rounded hover:bg-gray-900"
+          className="w-full text-white bg-black py-2 rounded hover:bg-gray-900 cursor-pointer"
         >
           BUY NOW
         </button>

@@ -18,7 +18,6 @@ export default async function ProductDetailPage({ params }) {
 
   if (!product) notFound();
 
-  // Convert _id (ObjectId) to string before passing as props
   const productId = product._id.toString();
 
   return (

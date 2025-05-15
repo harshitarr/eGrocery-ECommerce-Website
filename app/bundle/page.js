@@ -14,7 +14,7 @@ export default function PopularBundle() {
         const res = await fetch('/api/bundle');
         let data = await res.json();
 
-        // Ensure _id is a string
+       
         data = data.map(bundle => ({
           ...bundle,
           _id: bundle._id?.toString?.() ?? bundle._id,
@@ -39,7 +39,7 @@ export default function PopularBundle() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          productId: bundle._id, // ✅ Must match backend expectations
+          productId: bundle._id, 
           name: bundle.name,
           price: bundle.price,
           image: bundle.image,
@@ -47,7 +47,7 @@ export default function PopularBundle() {
       });
 
       const data = await res.json();
-      alert(data.message); // Replace with toast in production
+      alert(data.message); 
     } catch (err) {
       console.error('Error adding to cart:', err);
       alert('Something went wrong!');
@@ -77,7 +77,7 @@ export default function PopularBundle() {
                 <p className="text-lg text-green-500 font-bold mt-1">₹{bundle.price}</p>
                 <button
                   onClick={(e) => {
-                    e.preventDefault(); // Prevent link navigation
+                    e.preventDefault(); 
                     handleAddToCart(bundle);
                   }}
                   className="absolute bottom-2 right-4 bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition"

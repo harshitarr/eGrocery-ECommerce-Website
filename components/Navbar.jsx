@@ -20,7 +20,7 @@ export default function Navbar() {
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
         <Link href="/">
-          <div className="text-2xl font-bold text-green-600">eGrocery</div>
+          <div className="text-2xl font-bold text-green-600 cursor-pointer">eGrocery</div>
         </Link>
 
         <form onSubmit={handleSearch} className="flex items-center gap-2 w-full sm:w-auto">
@@ -34,7 +34,7 @@ export default function Navbar() {
             />
             <button
               type="submit"
-              className="bg-green-600 py-2 px-4 text-white rounded-r-md hover:bg-green-700 transition"
+              className="bg-green-600 py-2 px-4 text-white rounded-r-md hover:bg-green-700 transition cursor-pointer"
             >
               Search
             </button>
@@ -43,10 +43,10 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-6">
           <Link href="/">
-            <button className="text-gray-700 hover:text-green-600">Home</button>
+            <button className="text-gray-700 cursor-pointer hover:text-green-600">Home</button>
           </Link>
           <Link href="/contactus">
-            <button className="text-gray-700 hover:text-green-600">Contact Us</button>
+            <button className="text-gray-700 cursor-pointer hover:text-green-600">Contact Us</button>
           </Link>
           <Link href="/profile">
             <User className="cursor-pointer text-gray-700 hover:text-green-600" />

@@ -7,7 +7,6 @@ export default function PersonalSettings() {
   const { register, handleSubmit, setValue } = useForm();
   const [profilePic, setProfilePic] = useState(null);
 
-  // Load form data and profile picture on mount
   useEffect(() => {
     const savedData = localStorage.getItem('personalSettings');
     if (savedData) {
@@ -34,7 +33,6 @@ export default function PersonalSettings() {
       reader.onloadend = () => {
         const base64 = reader.result;
 
-        // Optional: compress or resize before saving (if needed)
 
         try {
           localStorage.setItem('profilePic', base64);
@@ -44,7 +42,7 @@ export default function PersonalSettings() {
         }
       };
 
-      reader.readAsDataURL(file); // convert to base64
+      reader.readAsDataURL(file); 
     }
   };
 
@@ -54,7 +52,6 @@ export default function PersonalSettings() {
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white rounded-xl shadow-md p-6 grid md:grid-cols-3 gap-6 max-w-5xl w-full"
       >
-        {/* Profile Picture Column */}
         <div className="flex flex-col items-center">
           <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-white shadow">
             <img
@@ -74,7 +71,6 @@ export default function PersonalSettings() {
           </label>
         </div>
 
-        {/* Personal Info Form */}
         <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <h2 className="col-span-2 text-xl font-semibold mb-2">My Profile</h2>
 

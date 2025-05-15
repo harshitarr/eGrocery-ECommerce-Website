@@ -34,7 +34,7 @@ export default function ContactUs() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
       <div className="flex flex-col md:flex-row bg-white rounded-md shadow-xl overflow-hidden w-full max-w-4xl">
-        {/* Left Contact Info */}
+       
         <div className="bg-green-500 text-white p-8 md:w-1/2">
           <h2 className="text-2xl font-semibold mb-6">Contact Us</h2>
           <div className="space-y-4 text-sm">
@@ -56,7 +56,7 @@ export default function ContactUs() {
           </div>
         </div>
 
-        {/* Right Form */}
+       
         <div className="p-8 md:w-1/2">
           <p className="text-gray-400 text-sm mb-6">Feel free to drop us a line below!</p>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -89,7 +89,7 @@ export default function ContactUs() {
             />
             <button
               type="submit"
-              className="bg-green-500 text-white px-8 py-2 rounded-full hover:bg-green-600 transition"
+              className="bg-green-500 cursor-pointer text-white px-8 py-2 rounded-full hover:bg-green-600 transition"
             >
               SEND
             </button>
