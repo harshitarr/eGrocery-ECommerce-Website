@@ -82,8 +82,7 @@ eco-web/
 ```
 ## 🖼️ Demo Video
 
-> [E-commerce Website](https://your-onedrive-link-here](https://drive.google.com/file/d/1ZwSZ9_KMCMTCSxMOtC1WN-uiwwW5VChL/view?usp=sharing))
-
+> [E-commerce-Website](https://drive.google.com/file/d/1ZwSZ9_KMCMTCSxMOtC1WN-uiwwW5VChL/view?usp=sharing)
 
 ## 🚀 Getting Started
 
