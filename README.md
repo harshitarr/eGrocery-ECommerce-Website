@@ -1,6 +1,6 @@
 # 🛍️ E-Commerce Website
 
-A full-stack, responsive E-commerce web application built with **Next.js**, **MongoDB**, and **Nodemailer**. The project includes a dynamic product catalog, cart management system, payment simulation, and email confirmation system. Clean UI is supported by **Lucide React** icons and Tailwind CSS.
+A baisc full-stack, responsive E-commerce web application built with **Next.js**, **MongoDB**, and **Nodemailer**. The project includes a dynamic product catalog, cart management system, payment simulation, and email confirmation system. Clean UI is supported by **Lucide React** icons and Tailwind CSS.
 
 ---
 
@@ -46,6 +46,40 @@ A full-stack, responsive E-commerce web application built with **Next.js**, **Mo
 
 ---
 
+## 📁 Project Structure
+
+```bash
+eco-web/
+│
+├── app/
+│   ├── api/                   # All API route handlers
+│   ├── bundle/                # Product bundle pages and AddToCart logic
+│   ├── cart/                  # Cart API (Add/Delete from DB)
+│   ├── categories/            # Product category APIs
+│   ├── contact/               # Nodemailer Contact API
+│   ├── popular/               # Popular product API
+│   ├── product/[id]/          # Product detail page and API
+│   ├── send-payment/          # Handles payment completion
+│   ├── contactus/             # Contact form UI
+│   ├── mycart/                # Cart UI
+│   ├── pay-now/, paynow/[id]/ # Payment pages
+│   ├── category/[category]/   # Filtered category view
+│   ├── popularproduct/        # Popular products page
+│   ├── profile/               # User profile
+│   ├── search/                # Search functionality
+│
+├── components/
+│   ├── Home/
+│   ├── Footer.jsx
+│   ├── Navbar.jsx
+│   └── ProductCard.jsx
+│
+├── models/                    # MongoDB models
+├── utils/                     # Utility functions (connectMongo, etc.)
+├── public/                    # Static files
+├── .env.local                 # Environment variables
+└── compass-connections.json  # MongoDB Compass config
+```
 ## 🖼️ Screenshots
 
 > *(Add screenshots of the homepage, cart page, and contact form here)*
@@ -58,4 +92,26 @@ A full-stack, responsive E-commerce web application built with **Next.js**, **Mo
 ```bash
 git clone https://github.com/harshitarr/eGrocery-ECommerce-Website.git
 cd eGrocery-ECommerce-Website
+```
+---
+## ⚙️ Installation & Setup
+
+```bash
+# Clone the repo
+git clone https://github.com/yourusername/eco-web.git
+
+# Navigate into the directory
+cd eco-web
+
+# Install dependencies
+npm install
+
+# Add .env.local
+MONGODB_URI=<your_mongo_connection_string>
+EMAIL_USER=<your_email>
+EMAIL_PASS=<your_email_app_password>
+
+# Start the development server
+npm run dev
+
 ```
