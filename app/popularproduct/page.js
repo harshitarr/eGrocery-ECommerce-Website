@@ -67,7 +67,7 @@ export default function PopularProduct() {
                 <div className="relative bg-gray-100 px-4 py-4 rounded-br-xl rounded-bl-xl">
                   <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
                   <p className="text-md text-gray-500 flex items-center gap-1">
-                    <MapPin size={14} className="text-gray-400" /> {product.weight}
+                    Weight: {product.weight}
                   </p>
                   <p className="text-lg text-green-500 font-bold mt-1">₹{product.price}</p>
 

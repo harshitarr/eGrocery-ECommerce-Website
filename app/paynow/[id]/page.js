@@ -10,19 +10,19 @@ const paymentMethods = [
 ];
 
 export default function PayNowPage() {
-  const params = useParams();  // Get the product ID from URL
-  const searchParams = useSearchParams();  // Get search parameters
-  const productType = searchParams.get("type");  // Get product type (e.g., category)
-  const productId = params.id;  // Get the product ID from URL
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const productType = searchParams.get("type");
+  const productId = params.id;
 
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [product, setProduct] = useState(null);
   const [cardDetails, setCardDetails] = useState({ name: "", number: "", cvc: "" });
   const [address, setAddress] = useState({ line: "", city: "", state: "", pincode: "" });
-  const [errorMessage, setErrorMessage] = useState("");  // Renamed for consistency
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(""); // separate loading error for product fetching
-  const [paymentDone, setPaymentDone] = useState(false);  // Track if payment is done
+  const [loadError, setLoadError] = useState("");
+  const [paymentDone, setPaymentDone] = useState(false);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -48,11 +48,7 @@ export default function PayNowPage() {
       try {
         const res = await fetch(apiRoute);
         const data = await res.json();
-        if (data.product) {
-          setProduct(data.product);
-        } else {
-          setProduct(data);
-        }
+        setProduct(data.product || data);
         setLoading(false);
       } catch (err) {
         console.error("Fetch error:", err);
@@ -65,32 +61,37 @@ export default function PayNowPage() {
   }, [productId, productType]);
 
   const handlePayNow = async () => {
-    setErrorMessage(""); // Reset error message on new attempt
+    setErrorMessage("");
 
     if (!selectedMethod) {
       setErrorMessage("Please select a payment method.");
       return;
     }
 
-    // Mastercard Validation
     if (selectedMethod === "mastercard") {
       const { name, number, cvc } = cardDetails;
       if (!name || !number || !cvc) {
         setErrorMessage("Please fill in all card details.");
         return;
       }
-
-      if (!/^\d{16}$/.test(number)) {  // Ensure card number is 16 digits and numeric
-        setErrorMessage("Please enter a valid 16-digit Mastercard number.");
+      if (!/^\d{16}$/.test(number)) {
+        setErrorMessage("Card number must be a 16-digit numeric value.");
+        return;
+      }
+      if (!/^\d{3}$/.test(cvc)) {
+        setErrorMessage("CVC must be a 3-digit numeric value.");
         return;
       }
     }
 
-    // COD Validation
     if (selectedMethod === "cod") {
       const { line, city, state, pincode } = address;
-      if (!line || !city || !state || !pincode || !/^\d{6}$/.test(pincode)) { // Ensure all fields are filled and pincode is 6 digits
-        setErrorMessage("Please fill in all address details correctly. Pincode must be a 6-digit number.");
+      if (!line || !city || !state || !pincode) {
+        setErrorMessage("Please fill in all address fields.");
+        return;
+      }
+      if (!/^\d{6}$/.test(pincode)) {
+        setErrorMessage("Pincode must be a 6-digit numeric value.");
         return;
       }
     }
@@ -112,7 +113,7 @@ export default function PayNowPage() {
       });
 
       if (res.ok) {
-        setPaymentDone(true);  // Set the payment as done if successful
+        setPaymentDone(true);
       } else {
         setErrorMessage("Payment failed. Please try again.");
       }
@@ -183,7 +184,10 @@ export default function PayNowPage() {
             placeholder="Card number"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={cardDetails.number}
-            onChange={(e) => setCardDetails({ ...cardDetails, number: e.target.value })}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, ""); // Remove non-numeric
+              setCardDetails({ ...cardDetails, number: val });
+            }}
             maxLength={16}
           />
           <input
@@ -191,7 +195,10 @@ export default function PayNowPage() {
             placeholder="CVC"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={cardDetails.cvc}
-            onChange={(e) => setCardDetails({ ...cardDetails, cvc: e.target.value })}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, "").slice(0, 3);
+              setCardDetails({ ...cardDetails, cvc: val });
+            }}
           />
         </div>
       )}
@@ -231,8 +238,10 @@ export default function PayNowPage() {
             placeholder="Pincode"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={address.pincode}
-            onChange={(e) => setAddress({ ...address, pincode: e.target.value })}
-            maxLength={6}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, "").slice(0, 6);
+              setAddress({ ...address, pincode: val });
+            }}
           />
         </div>
       )}

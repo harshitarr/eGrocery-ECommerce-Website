@@ -16,11 +16,13 @@ export default function PayNowPage() {
   const productPrice = searchParams.get('productPrice');
 
   const [selectedMethod, setSelectedMethod] = useState(null);
-  const [cardDetails, setCardDetails] = useState({ name: '', number: '', exp: '', cvc: '' });
-  const [address, setAddress] = useState('');
+  const [cardDetails, setCardDetails] = useState({ name: '', number: '', cvc: '' });
+  const [addressDetails, setAddressDetails] = useState({ line: '', city: '', state: '', pincode: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [paymentDone, setPaymentDone] = useState(false); // for success screen
+  const [paymentDone, setPaymentDone] = useState(false);
+
+  const isNumeric = (value) => /^\d+$/.test(value);
 
   const handlePayNow = async () => {
     setError('');
@@ -31,16 +33,31 @@ export default function PayNowPage() {
     }
 
     if (selectedMethod === 'mastercard') {
-      const { name, number, exp, cvc } = cardDetails;
-      if (!name || !number || !exp || !cvc) {
+      const { name, number, cvc } = cardDetails;
+      if (!name || !number || !cvc) {
         setError('Please fill in all card details.');
+        return;
+      }
+      if (!isNumeric(number) || number.length < 13 || number.length > 19) {
+        setError('Enter a valid card number (13-19 digits).');
+        return;
+      }
+      if (!/^\d{3}$/.test(cvc)) {
+        setError('CVC must be a 3-digit number.');
         return;
       }
     }
 
-    if (selectedMethod === 'cod' && !address.trim()) {
-      setError('Please enter your delivery address.');
-      return;
+    if (selectedMethod === 'cod') {
+      const { line, city, state, pincode } = addressDetails;
+      if (!line || !city || !state || !pincode) {
+        setError('Please fill in all address fields.');
+        return;
+      }
+      if (!isNumeric(pincode)) {
+        setError('Pincode must be numeric.');
+        return;
+      }
     }
 
     setLoading(true);
@@ -51,8 +68,8 @@ export default function PayNowPage() {
       productPrice,
       method: selectedMethod,
       cardDetails,
-      address,
-      email: 'recipient@example.com', // <-- replace with real or test email
+      address: addressDetails,
+      email: 'recipient@example.com',
     };
 
     try {
@@ -111,12 +128,17 @@ export default function PayNowPage() {
 
       {selectedMethod === 'mastercard' && (
         <div className="space-y-3">
-          <InputField label="Cardholder name" value={cardDetails.name} onChange={(e) => setCardDetails({ ...cardDetails, name: e.target.value })} />
-          <InputField label="Card number" value={cardDetails.number} onChange={(e) => setCardDetails({ ...cardDetails, number: e.target.value })} />
-          <div className="flex gap-3">
-            <InputField label="Expiration date" value={cardDetails.exp} onChange={(e) => setCardDetails({ ...cardDetails, exp: e.target.value })} />
-            <InputField label="CVC" value={cardDetails.cvc} onChange={(e) => setCardDetails({ ...cardDetails, cvc: e.target.value })} />
-          </div>
+          <InputField label="Cardholder Name" value={cardDetails.name} onChange={(e) => setCardDetails({ ...cardDetails, name: e.target.value })} />
+          <InputField label="Card Number" value={cardDetails.number} onChange={(e) => {
+            if (e.target.value === '' || isNumeric(e.target.value)) {
+              setCardDetails({ ...cardDetails, number: e.target.value });
+            }
+          }} />
+          <InputField label="CVC" value={cardDetails.cvc} onChange={(e) => {
+            if (e.target.value === '' || /^\d{0,3}$/.test(e.target.value)) {
+              setCardDetails({ ...cardDetails, cvc: e.target.value });
+            }
+          }} />
         </div>
       )}
 
@@ -128,13 +150,15 @@ export default function PayNowPage() {
       )}
 
       {selectedMethod === 'cod' && (
-        <div>
-          <textarea
-            placeholder="Enter your delivery address"
-            className="w-full h-24 border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
+        <div className="space-y-3">
+          <InputField label="Address Line" value={addressDetails.line} onChange={(e) => setAddressDetails({ ...addressDetails, line: e.target.value })} />
+          <InputField label="City" value={addressDetails.city} onChange={(e) => setAddressDetails({ ...addressDetails, city: e.target.value })} />
+          <InputField label="State" value={addressDetails.state} onChange={(e) => setAddressDetails({ ...addressDetails, state: e.target.value })} />
+          <InputField label="Pincode" value={addressDetails.pincode} onChange={(e) => {
+            if (e.target.value === '' || isNumeric(e.target.value)) {
+              setAddressDetails({ ...addressDetails, pincode: e.target.value });
+            }
+          }} />
         </div>
       )}
 

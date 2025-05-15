@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "fuse.js": "^7.1.0",
     "lucide-react": "^0.509.0",
     "mongodb": "^6.16.0",
     "mongoose": "^8.14.2",

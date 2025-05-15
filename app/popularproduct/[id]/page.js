@@ -40,7 +40,7 @@ export default async function ProductDetailPage({ params }) {
           <div className="mt-6">
             <h4 className="text-sm font-medium text-gray-600 mb-2">Description</h4>
             <pre className="text-sm text-gray-600 whitespace-pre-wrap">{product.description}</pre>
-            <p className="text-sm text-gray-600 mt-4">Items in Pack: <strong>{product.qantity}</strong></p>
+            <p className="text-sm text-gray-600 mt-4">In Stock: <strong>{product.qantity}</strong></p>
             <p className="text-sm text-gray-600 mt-4">Weight: <strong>{product.weight}</strong></p>
           </div>
 

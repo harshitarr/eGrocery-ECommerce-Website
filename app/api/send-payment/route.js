@@ -1,4 +1,3 @@
-// app/api/send-payment/route.js
 
 import nodemailer from "nodemailer";
 
@@ -6,7 +5,7 @@ export async function POST(req) {
   const body = await req.json();
 
   const transporter = nodemailer.createTransport({
-    service: "gmail", // or any other
+    service: "gmail",
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -15,7 +14,7 @@ export async function POST(req) {
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_RECEIVER, // where you want to receive the details
+    to: process.env.EMAIL_RECEIVER, 
     subject: "New Payment Received",
     html: `
       <h3>Payment Method: ${body.method}</h3>

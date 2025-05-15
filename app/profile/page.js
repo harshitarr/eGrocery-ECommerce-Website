@@ -7,6 +7,7 @@ export default function PersonalSettings() {
   const { register, handleSubmit, setValue } = useForm();
   const [profilePic, setProfilePic] = useState(null);
 
+  // Load form data and profile picture on mount
   useEffect(() => {
     const savedData = localStorage.getItem('personalSettings');
     if (savedData) {
@@ -25,15 +26,30 @@ export default function PersonalSettings() {
     localStorage.setItem('personalSettings', JSON.stringify(data));
   };
 
-const handleImageChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const imageURL = URL.createObjectURL(file);
-    setProfilePic(imageURL); // Good for preview only — not persistent
-  }
-};
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64 = reader.result;
+
+        // Optional: compress or resize before saving (if needed)
+
+        try {
+          localStorage.setItem('profilePic', base64);
+          setProfilePic(base64);
+        } catch (error) {
+          alert('Image is too large to save. Please use a smaller image.');
+        }
+      };
+
+      reader.readAsDataURL(file); // convert to base64
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-purple-50 flex justify-center items-center p-4">
+    <div className="min-h-screen bg-gray-100 flex justify-center items-center p-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white rounded-xl shadow-md p-6 grid md:grid-cols-3 gap-6 max-w-5xl w-full"
@@ -47,7 +63,7 @@ const handleImageChange = (e) => {
               className="object-cover w-full h-full"
             />
           </div>
-          <label className="text-sm text-pink-500 cursor-pointer">
+          <label className="text-sm text-green-600 cursor-pointer">
             Change
             <input
               type="file"
@@ -60,55 +76,55 @@ const handleImageChange = (e) => {
 
         {/* Personal Info Form */}
         <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <h2 className="col-span-2 text-xl font-semibold mb-2">Personal Settings</h2>
+          <h2 className="col-span-2 text-xl font-semibold mb-2">My Profile</h2>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">First Name</label>
-            <input {...register('firstName')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300" />
+            <input {...register('firstName')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Last Name</label>
-            <input {...register('lastName')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300" />
+            <input {...register('lastName')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Phone Number</label>
-            <input {...register('phone')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300" />
+            <input {...register('phone')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Email Address</label>
-            <input {...register('email')} type="email" className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300" />
+            <input {...register('email')} type="email" className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300" />
           </div>
 
           <div className="col-span-2">
             <label className="block text-sm font-medium text-gray-700">Address</label>
-            <input {...register('address')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300" />
+            <input {...register('address')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">City</label>
-            <input {...register('city')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300" />
+            <input {...register('city')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">State</label>
-            <input {...register('state')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300" />
+            <input {...register('state')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Postcode</label>
-            <input {...register('postcode')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300" />
+            <input {...register('postcode')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Country</label>
-            <input {...register('country')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300" />
+            <input {...register('country')} className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300" />
           </div>
 
           <div className="col-span-2 flex justify-end mt-4">
-            <button type="submit" className="bg-pink-500 text-white px-6 py-2 rounded hover:bg-pink-600">
+            <button type="submit" className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
               Update
             </button>
           </div>
