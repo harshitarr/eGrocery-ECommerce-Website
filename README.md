@@ -2,7 +2,7 @@
 
 A baisc full-stack, responsive E-commerce web application built with **Next.js**, **MongoDB**, and **Nodemailer**. The project includes a dynamic product catalog, cart management system, payment simulation, and email confirmation system. Clean UI is supported by **Lucide React** icons and Tailwind CSS.
 
----
+
 
 ## 📌 Features
 
@@ -31,7 +31,7 @@ A baisc full-stack, responsive E-commerce web application built with **Next.js**
   - Products, cart, and messages stored and retrieved via Mongoose models.
   - Object ID validation and error handling.
 
----
+
 
 ## 🛠️ Tech Stack
 
@@ -44,7 +44,7 @@ A baisc full-stack, responsive E-commerce web application built with **Next.js**
 | **Tailwind CSS** | Responsive UI design |
 | **Lucide React** | UI icons (cart, phone, etc.) |
 
----
+
 
 ## 📁 Project Structure
 
@@ -80,20 +80,19 @@ eco-web/
 ├── .env.local                 # Environment variables
 └── compass-connections.json  # MongoDB Compass config
 ```
-## 🖼️ Screenshots
+## 🖼️ Demo Video
 
-> *(Add screenshots of the homepage, cart page, and contact form here)*
+> [E-commerce Website](https://your-onedrive-link-here](https://drive.google.com/file/d/1ZwSZ9_KMCMTCSxMOtC1WN-uiwwW5VChL/view?usp=sharing)
 
----
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+**Clone the repository**
 ```bash
 git clone https://github.com/harshitarr/eGrocery-ECommerce-Website.git
 cd eGrocery-ECommerce-Website
 ```
----
+
 ## ⚙️ Installation & Setup
 
 ```bash
@@ -115,3 +114,12 @@ EMAIL_PASS=<your_email_app_password>
 npm run dev
 
 ```
+
+## 🔧 Planned Improvements
+- User Authentication-Implement a login and registration system to enable personalized shopping experiences.
+- User Switching-Support multiple user sessions, allowing users to switch between accounts seamlessly.
+
+## 👩‍💻 Author
+### Your Name - harshitarr ❤
+
+
