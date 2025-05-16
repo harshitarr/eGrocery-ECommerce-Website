@@ -119,6 +119,6 @@ npm run dev
 - User Switching-Support multiple user sessions, allowing users to switch between accounts seamlessly.
 
 ## 👩‍💻 Author
-### Your Name - harshitarr ❤
+### Harshita Ravindran Revathi - harshitarr ❤
 
 
